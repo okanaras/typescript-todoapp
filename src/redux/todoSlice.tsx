@@ -22,9 +22,19 @@ export const todoSlice = createSlice({
         ...state.todos.filter((todo: TodoType) => todo.id !== action.payload),
       ];
     },
+    updateTodoById: (
+      state: TodoInitialState,
+      action: PayloadAction<TodoType>
+    ) => {
+      state.todos = [
+        ...state.todos.map((todo: TodoType) =>
+          todo.id !== action.payload.id ? todo : action.payload
+        ),
+      ];
+    },
   },
 });
 
-export const { createTodo, removeTodoById } = todoSlice.actions;
+export const { createTodo, removeTodoById, updateTodoById } = todoSlice.actions;
 
 export default todoSlice.reducer;
